@@ -24,3 +24,5 @@
 "=============================================================================
 
 command! -nargs=? -bar Bindsplit call bindsplit#vsplit(<args>)
+
+nnoremap <silent> <Plug>BindsplitVsplit :call bindsplit#vsplit()<CR>
