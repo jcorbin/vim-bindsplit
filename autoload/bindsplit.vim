@@ -32,13 +32,15 @@ function! bindsplit#vsplit(...) abort
         let l:count=1
     endif
     echom l:count
-    let l:curwin=winnr()
+    let l:origwin=winnr()
     for i in range(1, l:count)
         vsplit
-        setlocal noscrollbind
+        execute (winnr() + 1) . "wincmd w"
         execute "normal! z+"
+    endfor
+    for i in range(l:count, 0, -1)
+        execute (l:origwin + i) . "wincmd w"
         setlocal scrollbind
     endfor
-    execute l:curwin . "wincmd w"
-    setlocal scrollbind
+    execute l:origwin . "wincmd w"
 endfunction
